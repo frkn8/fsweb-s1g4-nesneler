@@ -14,14 +14,15 @@ const serpmeKahvalti = {isim: "Serpme Kahvaltı", fiyat: 16, kategori:"Kahvaltı
 	Örnek MenuElemaniOlustur('Cheeseburger', 8, 'Burgerler') şunu döndürmeli: {isim: 'Cheeseburger', fiyat: 8, kategori: 'Burgerler'}
 */
 
-
 function MenuElemaniOlustur(isim, fiyat, kategori) {
 	return { 
 		isim: isim, 
 		fiyat: fiyat, 
-		kategori: kategori
+		kategori: kategori 
 	};
 }
+console.log(MenuElemaniOlustur('Cheeseburger', 8, 'Burgerler'))
+
 
 
 
@@ -35,7 +36,14 @@ function MenuElemaniOlustur(isim, fiyat, kategori) {
 	Örnek: MenuElemaniOlustur("Karışık Pizza",5,"Pizzalar") şunu döndürür: {isim:"Karışık Pizza",fiyat:5,kategori:"Pizzalar"}
 */
 
-
+function menuElemaniOlustur(isim, fiyat, kategori) {
+	return {
+		isim: isim, 
+		fiyat: fiyat, 
+		kategori: kategori, 
+	};
+}
+console.log(menuElemaniOlustur("Karışık Pizza",5,"Pizzalar"))
 
 /* Görev 2: 
 	Özel bir öğle yemeği yiyorsun! Öğretmen ve öğrencilere %25, diğer kişilere %10 indirim var. Aşağıdaki burger nesnesine, indirimi fiyatı otomatik olarak hesaplayan bir metot ekleyin.
@@ -47,20 +55,23 @@ function MenuElemaniOlustur(isim, fiyat, kategori) {
 	4. String argümanına, 'öğretmen', 'öğrenci', ya da 'diğer' değerlerinden birini kullanarak fonksiyonunuzu çağırın.
 	
 	Örnek: burger.indirim("öğretmen") 13.5 döndürmeli ve burger.indirim("diğer") 16.2 döndürmeli
-*/
+*/ 
 
 
 const burger = {
 	isim: "Burger", 
 	fiyat: 18, 
-	kategori: "Öğle Yemeği", 
+	kategori: "Öğle Yemeği",
+	indirim: function(indirimUygulanacakMüsteriTipi)
+	{
+		return (indirimUygulanacakMüsteriTipi === "öğretmen") || (indirimUygulanacakMüsteriTipi === "öğrenci") ? this.fiyat * 0.75 : this.fiyat * 0.9; 
+	} 
 
 }
 
 
-
 ///////////////Değerlendirmeler (MVP)///////////////////
-const degerlendirmeler = [
+ const degerlendirmeler = [
     {isim: "Nalan", puan: 5, geribildirim:"Mükemmel atmosfer ve mükemmel vegan seçenekleri!"},
     {isim: "Kuddusi", puan: 3, geribildirim:"Benim zevkime göre biraz fazla yenilikçi, burger iyi ama fiyatı yüksek"},
     {isim: "Kamuran", puan: 4, geribildirim:"eğlenceli bilgiler ve havalı hisler"},
@@ -76,6 +87,7 @@ const degerlendirmeler = [
 	1. Sadece Ahmet'in geribildirimini konsolda görüntüleyin - fonksiyona gerek yok
 */
 
+ console.log(degerlendirmeler[degerlendirmeler.findIndex(x => x.isim === "Ahmet")]);
 
 
 /*  Görev 4 (ototest yok):  
@@ -84,7 +96,8 @@ const degerlendirmeler = [
 	2. degerlendirmeler dizisini konsolda görüntüleyerek çalışmanızı kontrol edin
 */
 
-
+ degerlendirmeler[degerlendirmeler.findIndex(x => x.isim === "Reyna")].geribildirim = "bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım";
+ console.log(degerlendirmeler)
 
 /*  Görev 5: 
 	isim, puan, geribildirim'i içeren bir değerlendirme nesnesi oluşturup, yeni değerlendirmeyi mevcut dizinin(array) sonuna ekleyip sonuç dizisini döndüren bir fonksiyon tanımlayın. 
@@ -98,9 +111,15 @@ const degerlendirmeler = [
 */
 
 
-function DegerledirmeEkle(/*Kodlar buraya */){
-	/*Kodlar buraya */
-	
+function DegerledirmeEkle(degerlendirmelerDizisi,musteriIsmi,MusteriPuani,musteriGeriBildirimi){
+	degerlendirmelerDizisi.push({
+		isim: musteriIsmi,
+		puan: MusteriPuani,
+		geribildirim: musteriGeriBildirimi
+	}
+
+	)
+	return degerlendirmelerDizisi;
 }
 
 
@@ -116,8 +135,13 @@ function DegerledirmeEkle(/*Kodlar buraya */){
 */
 
 
-function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
+function AnahtardanDegerlendirmeAl(degerlendirmelerDizisi, diziElemaniArrayIndex) {
+	
+	const musteriIsmi = degerlendirmelerDizisi[diziElemaniArrayIndex].isim;
+	const musteriPuani = degerlendirmelerDizisi[diziElemaniArrayIndex].puan;
+	const musteriGeriBildirimi = degerlendirmelerDizisi[diziElemaniArrayIndex].geribildirim;
+
+	return musteriIsmi + " isimli kişi " + musteriPuani + " puan verdi ve şunları yazı: " + musteriGeriBildirimi;
 
 }
 
@@ -136,8 +160,13 @@ function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
 */
 
 
-function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
+function SonDegerlendirmeyiAl(degerlendirmelerDizisi) {
+	const sonMusteriIsmi = degelendirmelerDizisi[degerlendirmelerDizisi.length - 1].isim;
+	const sonMusterPuanı = degelendirmelerDizisi[degerlendirmelerDizisi.length - 1].puan;
+	const sonMusteriGeriBildirimi = degelendirmelerDizisi[degerlendirmelerDizisi.length - 1].geribildirim;
+
+    return sonMusteriIsmi + "isimli kişi " + sonMusterPuanı + "puanverdi ve şunları yazdı: " + sonMusteriGeriBildirimi;
+
 } 
 
 
@@ -158,9 +187,14 @@ function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
 	]
 */
 
-function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
-    /* Kodlar buraya */
+function PuanaGoreDegerlendirmeAl(degerlendirmelerDizisi, puanBaraji) {
+    const newObject = [];
+    for (let i=0; i<degerlendirmelerDizisi.length; i++)
+        if(Math.floor(degerlendirmelerDizisi[i].puan) === puanBaraji)
+            newObject.push(degerlendirmelerDizisi[i]);
+            return newObject;
 }
+console.log(PuanaGoreDegerlendirmeAl(degerlendirmeler,4));
 
 
 /*  BONUS 2:    
@@ -170,9 +204,14 @@ function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
 	
 */
 
-function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
-    /* Kodlar buraya */
+function UzunDegerlendirmeleriAl(girdiDizi) {
+    const newArray = [];
+    for(let i=0; i<girdiDizi.lengt; i++)
+        if(girdiDizi[i].geribildirim.split(" ").length > 15)
+            newArray.push(girdiDizi[i]);
+    return newArray;
 }
+console.log(UzunDegerlendirmeleriAl(degerlendirmeler));
 
 
 /*  BONUS 3:  
@@ -193,11 +232,19 @@ function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
 */
 
 
-function arabaYapici(/* Kodlar buraya */) {
-    /* Kodlar buraya */
-    
+function arabaYapici(kilometreOlarakGirdi) {
+    const araba = {
+        kilometreSayaci: kilometreOlarakGirdi,
+        surus: function(mesafe)
+        {
+            this.kilometreSayaci = this.kilometreSayaci + mesafe;
+            return this.kilometreSayaci;
+        }
+    }
+    return araba;
 }
-
+const araba = arabaYapici(10);
+araba.surus(100);
 
 /*  Buradan aşağıdaki kodları değiştirmeyin lütfen */
 function sa(){
